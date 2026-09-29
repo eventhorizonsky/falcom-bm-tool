@@ -1,0 +1,46 @@
+MIT License
+
+Copyright (c) 2025 falcom_bm contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+Third-party attribution
+-----------------------
+
+The following open-source projects are referenced or ported from. Their
+original licenses are preserved and attributed below.
+
+1. Aureole-Suite/Falcompress
+   https://github.com/Aureole-Suite/Falcompress
+   License: MIT OR Apache-2.0
+
+   The BZip mode-2 bitstream layout, the compressor's match-search strategy,
+   and the terminating sequence in this project are ported from:
+
+       src/bzip/decompress.rs
+       src/bzip/compress/mode2.rs
+       src/bzip/mod.rs
+
+2. Kyuuhachi - "Ys I/II/Origin/VI extractor"
+   https://gist.github.com/Kyuuhachi/42b6acd38a99f7cc8d924286617a9c02
+
+   The NNI archive (.na/.ni) table-of-contents de-obfuscation and the zlib
+   handling of ".Z" entries are based on this work.

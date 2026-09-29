@@ -1,0 +1,13 @@
+# 统一换行符处理
+* text=auto
+
+*.py   text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+LICENSE text eol=lf
+
+*.bmp  binary
+*.png  binary
+*._bm  binary
+*.na   binary
+*.ni   binary
