@@ -12,6 +12,24 @@ out/
 output/
 *.bm.bak
 
+# 测试与解包产物（体积大，且多含游戏原始素材，不入库）
+bmp/
+pc_bmp/
+extracted/
+patched/
+new/
+check*/
+
+# 游戏数据文件
+*.na
+*.ni
+*._bm
+*.Z
+
+# 图像
+*.bmp
+*.png
+
 # 编辑器 / 系统
 .vscode/
 .idea/

@@ -34,7 +34,7 @@ pip install Pillow
 
 ### `.na` / `.ni`（归档）
 
-`.ni` 是索引（文件名表 + TOC），`.na` 是数据。条目名为 CP932 编码，`.Z` 结尾的条目为 zlib 压缩。本工具会自动解压 `.Z`。
+`.ni` 是索引（文件名表 + TOC），`.na` 是数据。条目名为 CP932 编码，`.Z` 结尾的条目为 zlib 压缩。本工具会自动解压 `.Z`，**并把落盘文件名中的 `.Z` 去掉**（例如 `BMP\BK1P.BMP.Z` → `BMP/BK1P.BMP`）。若要保留原始后缀，加 `--keep-ext`。
 
 ---
 
@@ -152,7 +152,7 @@ bk1p._bm                     解压  131640  重建   75072  完全一致
 python falcom_bm.py archive-list data_ys1.na --filter bk
 ```
 
-提取（可按名称过滤，`.Z` 自动解压）：
+提取（可按名称过滤，`.Z` 自动解压并去掉后缀）：
 
 ```bash
 python falcom_bm.py archive-extract data_ys1.na -o ./pc_bmp --filter "bmp\bk"
@@ -169,6 +169,7 @@ python falcom_bm.py archive-extract data_ys1.na -o ./pc_bmp --filter "bmp\bk"
 | `--template` | 封包时使用的原始 `._bm` |
 | `--template-dir` | 批量封包时原始 `._bm` 所在目录 |
 | `--filter` | 归档操作时按名称子串过滤 |
+| `--keep-ext` | 归档提取时保留 `.Z` 后缀 |
 | `--no-fit-header` | 长度不一致时报错，不自动修正 BMP 头 |
 
 ---

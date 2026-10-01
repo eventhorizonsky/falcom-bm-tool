@@ -437,6 +437,14 @@ class Archive:
                 raise ValueError("解压长度不符: %s" % name)
         return raw
 
+    @staticmethod
+    def output_name(entry) -> str:
+        """条目落盘时使用的名称；.Z 条目去掉 .Z 后缀。"""
+        name = entry[0].replace("\\", "/")
+        if name.upper().endswith(".Z"):
+            name = name[:-2]
+        return name
+
 
 # ---------------------------------------------------------------------------
 # CLI
@@ -577,16 +585,20 @@ def cmd_archive_extract(args) -> int:
         name, size, _ = entry
         if pattern and pattern not in name.lower():
             continue
-        safe = name.replace("\\", "/")
-        dst = os.path.join(args.output, safe)
-        os.makedirs(os.path.dirname(dst), exist_ok=True)
         try:
             data = arc.data(entry)
         except Exception as exc:
             print("  失败 %-40s %s" % (name, exc))
             continue
+        logical = name.replace("\\", "/")
+        out_name = logical[:-2] if logical.upper().endswith(".Z") else logical
+        if args.keep_ext:
+            out_name = logical
+        dst = os.path.join(args.output, out_name)
+        os.makedirs(os.path.dirname(dst) or ".", exist_ok=True)
         open(dst, "wb").write(data)
-        print("  %-46s %10d -> %s" % (name, size, safe))
+        mark = "" if out_name == logical else " -> %s" % out_name
+        print("  %-46s %10d%s" % (logical, size, mark))
         count += 1
     print("\n提取 %d 个文件 -> %s" % (count, args.output))
     return 0
@@ -650,6 +662,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("path", help=".na 文件路径")
     p.add_argument("-o", "--output", required=True, help="输出目录")
     p.add_argument("--filter", help="只提取名称含该子串的条目")
+    p.add_argument("--keep-ext", action="store_true",
+                   help="保留 .Z 后缀（默认：解压后去掉）")
     p.set_defaults(func=cmd_archive_extract)
 
     return parser
